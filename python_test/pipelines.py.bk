@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+
+# Define your item pipelines here
+#
+# Don't forget to add your pipeline to the ITEM_PIPELINES setting
+# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+
+#import traceback
+from twisted.enterprise import adbapi
+import MySQLdb
+import MySQLdb.cursors
+from scrapy.conf import settings
+from python_test.models.Dmoz_model import Booksmodel
+from scrapy.exception import DropItem
+class DmozPipeline(object):
+	def __init__(self,dbpool):
+		print '--**********__'
+		self.dbpool = dbpool
+	def from_settings(cls,settings):
+		dbparames = dict(
+			host=settings['MYSQL_HOST'],
+			db=settings['MYSQL_DBNAME'],
+			user=settings['MYSQL_USER'],
+			passwd=settings['MYSQL_PASSWD'],
+			charset='utf8',
+			cursorclass=MySQLdb.cursors.DictCursor,
+			use_unicode=False,
+		)
+		dbpool = adbapi.ConnectionPool('MySQLdb',**dbparames)
+		return cls(dbpool)
+	def process_item(self, item, spider):
+		query = self.dbpool.runInteraction(self.__conditional_insert,item)
+		query.addErrback(self.__handle_error,item,spider)
+		return item
+	def __conditional_insert(self,tx,item):
+		sql = "insert into Books ('title') values(%s)";
+		params = (item['title'])
+		tx.execute(sql,params)
