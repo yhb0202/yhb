@@ -4,6 +4,6 @@ class Booksmodel(testModel):
 	title = CharField(null=True)
 	class Meta:
 		db_table = 'DmozBooks'
-tables = [Booksmodel]
+tables = [testModel]
 db.connect()
 db.create_tables(tables,safe=True)
