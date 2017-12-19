@@ -22,6 +22,7 @@ class DmozSpider(scrapy.Spider):
 			item = DmozItem()
 			t = sel.xpath('div[3]/a/div[1]/text()').extract()
 			item['title'] = t
+			#print item
 			#items.append(item)
 			print '@@@@@@@@@@@@@@@@@@@@@@@'
 			yield item

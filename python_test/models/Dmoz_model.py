@@ -1,9 +1,10 @@
 from peewee import *
 from python_test.models.db_config import testModel,db
 class Booksmodel(testModel):
-	title = CharField(null=True)
+	title = CharField()
 	class Meta:
 		db_table = 'DmozBooks'
-tables = [testModel]
+tables = [Booksmodel]
+print tables
 db.connect()
 db.create_tables(tables,safe=True)
