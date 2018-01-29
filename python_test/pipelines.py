@@ -10,3 +10,14 @@ class Dmoz_pipelines(object):
 			setattr(model, k, v[0])
 			#print model
 		model.save()
+
+class I4_pipelines(object):
+	def process_item(self,item,spider):
+		model = I4model()
+		for k,v in item.iteritems():
+			print k
+			print '------'
+			print v[0]
+			setattr(model, k, v[0])
+			#print model
+		model.save()
