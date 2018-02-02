@@ -1,9 +1,9 @@
 from peewee import *
 db = MySQLDatabase(
 	host = "127.0.0.1",
-	database = "test_01",
+	database = "test",
 	user = "root",
-	passwd = "password",
+	passwd = "yuan0202",
 	charset = "utf8"
 )
 class testModel(Model):

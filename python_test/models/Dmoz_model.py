@@ -6,11 +6,14 @@ class Booksmodel(testModel):
 		db_table = 'DmozBooks'
 tables = [Booksmodel]
 print tables
-db.connect()
-db.create_tables(tables,safe=True)
+print 2222222222
+#db.connect()
+#db.create_tables(tables,safe=True)
 
 class I4model(testModel):
+	link = CharField()
 	title = CharField()
+	content = CharField()
 	class Meta:
 		db_table = 'iphone'
 tables = [I4model]

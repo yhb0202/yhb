@@ -15,8 +15,15 @@ class DmozItem(scrapy.Item):
 
 class I4Item(scrapy.Item):
 	
-    link = scrapy.Field() # 标题
+    link = scrapy.Field() # 链接
+    title = scrapy.Field() # 标题
     #time = scrapy.Field()  #发布时间
-    #content = scrapy.Field()  #内容
+    content = scrapy.Field()  #内容
     pass
 
+class I4_detailItem(scrapy.Item):
+    title = scrapy.Field()
+    report_date = scrapy.Field()
+    source = scrapy.Field()
+    read_num = scrapy.Field()
+    pass	
